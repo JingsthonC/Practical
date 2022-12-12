@@ -1,0 +1,137 @@
+{
+  "users": [
+    {
+      "id": 8,
+      "email": "lindsay.ferguson@reqres.in",
+      "first_name": "Lindsay",
+      "last_name": "Ferguson",
+      "avatar": "https://reqres.in/img/faces/8-image.jpg"
+    },
+    {
+      "id": 9,
+      "email": "tobias.funke@reqres.in",
+      "first_name": "Tobias",
+      "last_name": "Funke",
+      "avatar": "https://reqres.in/img/faces/9-image.jpg"
+    },
+    {
+      "id": 10,
+      "email": "byron.fields@reqres.in",
+      "first_name": "Byron",
+      "last_name": "Fields",
+      "avatar": "https://reqres.in/img/faces/10-image.jpg"
+    },
+    {
+      "id": 12,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://reqres.in/img/faces/12-image.jpg"
+    },
+    {
+      "id": 13,
+      "email": "zarapoc@gmail.com",
+      "first_name": "Zarah",
+      "last_name": "Castillo",
+      "avatar": ""
+    }
+  ],
+  "registered": [
+    {
+      "full_name": "Jingsthon Castillo",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 2
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 3
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 4
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 5
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 6
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 7
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 8
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 9
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 10
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 11
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 12
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "123456",
+      "id": 13
+    },
+    {
+      "full_name": "test",
+      "email": "castillojingsthon@gmail.com",
+      "password": "test",
+      "id": 14
+    },
+    {
+      "full_name": "test",
+      "email": "1castillojingsthon@gmail.com",
+      "password": "1234",
+      "id": 15
+    },
+    {
+      "full_name": "test",
+      "email": "test@mail.com",
+      "password": "test",
+      "id": 16
+    }
+  ]
+}
