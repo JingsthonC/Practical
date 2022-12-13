@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
   private token = '';
-  private apiURL = 'http://localhost:5000/users';  //
+  public apiURL = 'https://reqres.in/api/users';  
 
   // inject here private http: HttpClient
   constructor(private http: HttpClient) { }
@@ -36,11 +36,12 @@ export class ApiService {
   //  }
 
    getUser(){
-    return this.http.get<any>('https://reqres.in/api/users',
-    {
-      headers: new HttpHeaders({  }),
-      params: new HttpParams().set('page','1') 
-    }
+    return this.http.get<any>('https://reqres.in/api/users?page=1&per_page=12'
+    // ,
+    // {
+    //   headers: new HttpHeaders({  }),
+    //   params: new HttpParams().set('page','1') 
+    // }
     )
     .pipe(map((res: any) => {
       return res?.data; //res is now a json file that is accessing a data propoerty
@@ -98,6 +99,8 @@ export class ApiService {
       return res?.data;
     })) 
    }
+   
 
 
 }
+

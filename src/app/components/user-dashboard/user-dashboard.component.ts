@@ -4,7 +4,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserModel } from './user.model';
 import { ApiService } from 'src/app/services/api.service';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
+import { map } from 'rxjs';
 
 
 @Component({
@@ -15,7 +16,9 @@ import {HttpClient} from '@angular/common/http';
 export class UserDashboardComponent implements OnInit{
   
 
-
+  newNumberofPages !: boolean;
+  previous !: boolean;
+  next !: boolean;
   p: number = 1;
   faEdit = faEdit;
   faTrash = faTrash;
@@ -24,8 +27,14 @@ export class UserDashboardComponent implements OnInit{
   showUpdate !: boolean;
   userModelObj : UserModel = new UserModel();
   userData !: any;
-  //tokenData: string = '';
-
+  // userData : any[] = [];
+  private apiUrl:string = 'https://reqres.in/api/users?'; 
+  //for pagination no library//
+  per_page: string ='';
+  pageNumber: string = '';
+  total: string = '';
+  pageNumbers: any[] = [];
+  public selectedPage = this.pageNumbers[0];
   
 
     constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) {
@@ -39,7 +48,12 @@ export class UserDashboardComponent implements OnInit{
       email: ['', Validators.required]
     })
 
-    this.getUsers();
+    // this.getUsers();
+    // for new pagination no library//
+    this.changeDisplay();
+    this.pageNumbers.push(1);
+    this.newNumberofPages = false;
+    
   }
 
   onClickAdd() {
@@ -158,5 +172,100 @@ export class UserDashboardComponent implements OnInit{
 
   removeToken() {
     localStorage.removeItem('token');
+  }
+
+  changeDisplay() {
+    this.per_page = '12';
+    const queryString: string = `${this.apiUrl}page=1&per_page=${this.per_page}`;
+    this.http.get<any>(queryString).pipe(map((res: any) => {
+      this.per_page = '';
+      return res;
+    })).subscribe(res => {
+      this.userData = res?.data;
+      this.total = res?.total;
+    })
+  }
+
+  changeNumber(event: any){
+    this.previous = false;
+    this.next = true;
+    this.newNumberofPages = true;
+    this.selectedPage = '1';
+    this.pageNumbers = [];
+    this.per_page = (<HTMLSelectElement>event.target).value;
+
+      if(this.per_page === '12'){
+        this.newNumberofPages = false;
+      }
+
+    let division = (parseInt(this.total) / parseInt(this.per_page));
+    
+      for ( let i = 1; i <= division; i++){
+        this.pageNumbers.push(i);
+      }
+
+    this.pageNumber = division.toString(); 
+    const queryString: string = `${this.apiUrl}page=1&per_page=${this.per_page}`;
+    this.http.get<any>(queryString).pipe(map((res: any) => {
+      return res;
+    })).subscribe(res => {
+      this.userData = res?.data;   
+    })
+    console.log(this.selectedPage);
+  }
+  onPageChange(page: any){
+    this.selectedPage = page;
+    const queryString: string = `${this.apiUrl}page=${page}&per_page=${this.per_page}`;
+    this.http.get<any>(queryString).pipe(map((res: any) => {
+      return res;
+    })).subscribe(res => {
+      this.userData = res?.data;   
+    })
+    switch(page) {
+      case 1:
+        // code block
+        this.previous = false;
+        this.next = true;
+        break;
+      case page = Math.max.apply(null, this.pageNumbers):
+        // code block
+        this.previous = true;
+        this.next = false;
+        break;
+      default:
+        // code block
+        this.previous = true;
+        this.next = true;
+    }
+  }
+  onPrevious(){
+    console.log (this.selectedPage = parseInt(this.selectedPage) - 1);
+    this.next = true;
+    if(this.selectedPage === 0) {
+      this.previous = false;
+    }
+    const queryString: string = `${this.apiUrl}page=${this.selectedPage.toString()}&per_page=${this.per_page}`;
+    this.http.get<any>(queryString).pipe(map((res: any) => {
+      return res;
+    })).subscribe(res => {
+      this.userData = res?.data;   
+    })
+  }
+
+  onNext(){
+    console.log (this.selectedPage = parseInt(this.selectedPage) + 1);
+    this.previous = true;
+    if(this.selectedPage === Math.max.apply(null, this.pageNumbers)) {
+      this.next = false;
+    }
+    const queryString: string = `${this.apiUrl}page=${this.selectedPage.toString()}&per_page=${this.per_page}`;
+    this.http.get<any>(queryString).pipe(map((res: any) => {
+      return res;
+    })).subscribe(res => {
+      this.userData = res?.data;   
+    })
+  }
+  onLoad(){
+   
   }
 }
