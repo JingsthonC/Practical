@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AddUserModel } from '../header/addUser.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -15,8 +14,7 @@ import {HttpClient} from '@angular/common/http';
 export class HeaderComponent  implements OnInit {
 
   p: number = 1;
-  faEdit = faEdit;
-  faTrash = faTrash;
+
   formValue !: FormGroup;
   showAdd !: boolean;
   showUpdate !: boolean;

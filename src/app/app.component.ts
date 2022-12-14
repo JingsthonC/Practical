@@ -9,7 +9,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'angular-crud';
+  title = 'Practical - Admin Panel';
 
   constructor(private auth: AuthService, private router: Router) {
 

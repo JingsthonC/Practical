@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ApiService {
-  private token = '';
+  // private token = '';
   public apiURL = 'https://reqres.in/api/users';  
 
   // inject here private http: HttpClient

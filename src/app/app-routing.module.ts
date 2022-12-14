@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { ApiloginComponent } from './components/apilogin/apilogin.component';
 import { ApiSignUpComponent } from './components/api-sign-up/api-sign-up.component';
 import { AuthGuard } from './services/auth.guard';
@@ -17,9 +16,6 @@ const routes: Routes = [
           loadChildren: () => 
           import('./modules/admin/admin.module').then((m)=>m.AdminModule) },
   {path: '**', component: NotFoundComponent},
-  
-  
-  
 ];
 
 

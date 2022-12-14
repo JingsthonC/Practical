@@ -4,7 +4,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserModel } from './user.model';
 import { ApiService } from 'src/app/services/api.service';
-import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { map } from 'rxjs';
 
 
@@ -38,9 +38,7 @@ export class UserDashboardComponent implements OnInit{
   imgUrl: string;
   
 
-    constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) {
-      
-    }
+    constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) {}
   ngOnInit(): void {
     
     this.formValue = this.formBuilder.group({
@@ -111,7 +109,6 @@ export class UserDashboardComponent implements OnInit{
 
     this.showAdd = false;
     this.showUpdate = true;
-
     this.userModelObj.id = data.id;
     this.formValue.controls['first_name'].setValue(data.first_name);
     this.formValue.controls['last_name'].setValue(data.last_name);
@@ -228,15 +225,12 @@ export class UserDashboardComponent implements OnInit{
     this.previous = true;
     if(this.selectedPage === Math.max.apply(null, this.pageNumbers)) {
       this.next = false;
-    }
+      }
     const queryString: string = `${this.apiUrl}page=${this.selectedPage.toString()}&per_page=${this.per_page}`;
     this.http.get<any>(queryString).pipe(map((res: any) => {
       return res;
     })).subscribe(res => {
       this.userData = res?.data;   
     })
-  }
-  onLoad(){
-   
   }
 }
