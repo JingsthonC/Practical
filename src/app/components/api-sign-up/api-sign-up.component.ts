@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { ApiSignUpModel } from './api-sign-up.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-api-sign-up',
@@ -18,7 +19,7 @@ export class ApiSignUpComponent implements OnInit {
 
 
 
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private api: ApiService) {
+  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private api: ApiService, private auth: AuthService) {
 
   }
 
@@ -27,6 +28,10 @@ export class ApiSignUpComponent implements OnInit {
       email: ['', Validators.required],
       password: [''],
     })
+    if(this.auth.isLoggedIn()){
+      this.router.navigate(['admin']);
+      alert('Still Logged In!');
+    }
   }
 
   signUp() :void { 

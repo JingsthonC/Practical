@@ -2,18 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AddUserModel } from '../add-user/addUser.model';
+import { AddUserModel } from '../header/addUser.model';
 import { ApiService } from 'src/app/services/api.service';
 import {HttpClient} from '@angular/common/http';
 
-@Component({
-  selector: 'app-add-user',
-  templateUrl: './add-user.component.html',
-  styleUrls: ['./add-user.component.css']
-})
-export class AddUserComponent implements OnInit{
-  
 
+@Component({
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.css']
+})
+export class HeaderComponent  implements OnInit {
 
   p: number = 1;
   faEdit = faEdit;
@@ -60,10 +59,6 @@ export class AddUserComponent implements OnInit{
       this.showAdd = false;
       this.showUpdate = true;
       this.showDelete = true;
-      // let ref = document.getElementById('cancel');
-      // ref?.click();
-      // this.formValue.reset(); 
-      // this.getUsers(); // added lang
     }, err => {
       alert( JSON.stringify(err?.error ));
       console.log(err?.error)
@@ -105,4 +100,13 @@ export class AddUserComponent implements OnInit{
       this.userData = res;   
     })
   }
+  removeToken() {
+    localStorage.removeItem('token');
+  }
 }
+
+
+
+  
+
+

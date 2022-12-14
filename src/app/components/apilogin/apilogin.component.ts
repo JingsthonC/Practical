@@ -27,6 +27,7 @@ export class ApiloginComponent implements OnInit {
     //to avoid returning to logged in when authenticated
     if(this.auth.isLoggedIn()){
       this.router.navigate(['admin']);
+      alert('Still Logged In!');
     }
 
     this.loginForm = this.formBuilder.group({

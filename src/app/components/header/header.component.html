@@ -1,11 +1,22 @@
-<button 
-type="button" 
-class="btn btn-primary" 
-id = "addUserbtn"
-data-toggle="modal" 
-data-target="#newModal"
-(click) = "onClickAdd()"
->Add User</button>
+<nav class="navbar navbar-light bg-secondary">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1>User Panel</h1>
+      <div class="d-flex">
+        <button 
+        type="button" 
+        class="btn btn-primary" 
+        id = "addUserbtn"
+        data-toggle="modal" 
+        data-target="#newModal"
+        (click) = "onClickAdd()"
+        >Add User</button>
+        <button routerLink="/login" class="btn btn-danger mx-2" (click)="removeToken()">Logout</button>
+      </div>
+    </div>
+</nav>
+
+
+
 
 <div class="container">
   
@@ -86,7 +97,3 @@ data-target="#newModal"
       </div>
     </div>
   </div>
-
-
-
-  
