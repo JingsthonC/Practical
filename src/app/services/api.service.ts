@@ -67,7 +67,7 @@ export class ApiService {
    apiUpdateUser(data: any) {
     return this.http.put<any>('https://reqres.in/api/users/2', data)
     .pipe(map((res:any) => {
-      return res?.data;
+      return res;
     }))
    }
 

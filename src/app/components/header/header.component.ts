@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, OnInit } from '@angular/core';
 
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { AddUserModel } from '../header/addUser.model';
-import { ApiService } from 'src/app/services/api.service';
-import {HttpClient} from '@angular/common/http';
+import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {  AddUserModel } from '../header/addUser.model';
+import {  ApiService } from 'src/app/services/api.service';
+import {  HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -12,16 +12,13 @@ import {HttpClient} from '@angular/common/http';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent  implements OnInit {
-
-  p: number = 1;
-
+  
   formValue !: FormGroup;
   showAdd !: boolean;
   showUpdate !: boolean;
   showDelete !: boolean;
   userModelObj : AddUserModel = new AddUserModel();
-  userData !: any;
-
+  updateRes !: string;
   
 
     constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) {
@@ -29,12 +26,10 @@ export class HeaderComponent  implements OnInit {
     }
   ngOnInit(): void {
     
-    
     this.formValue = this.formBuilder.group({
       name : ['', Validators.required],
       job: ['', Validators.required],
     })
-    this.getUsers();
     
   }
 
@@ -45,38 +40,33 @@ export class HeaderComponent  implements OnInit {
     this.showDelete = false;
   }
 
-  
   postUserDetails() :void { 
     this.userModelObj.name = this.formValue.value.name;
     this.userModelObj.job = this.formValue.value.job;
-
     this.api.postUser(this.userModelObj)
-    .subscribe(res => {
-      console.log(res);
-      alert('User Added Successfully!');
-      this.showAdd = false;
-      this.showUpdate = true;
-      this.showDelete = true;
-    }, err => {
-      alert( JSON.stringify(err?.error ));
-      console.log(err?.error)
-    })
+                    .subscribe(res => {
+                    alert('User Added Successfully!');
+                    this.showAdd = false;
+                    this.showUpdate = true;
+                    this.showDelete = true;
+                    }, err => {
+                      alert( JSON.stringify(err?.error ));
+                      console.log(err?.error)
+                    })
   }
 
   onUpdate(){
     this.userModelObj.name = this.formValue.value.name;
     this.userModelObj.job = this.formValue.value.job;
 
-
     if(confirm("Are you sure you want to update?"))
 
     this.api.apiUpdateUser(this.userModelObj)
-    .subscribe(res=>{
-      alert('Updated Successfully!');
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      //this.formValue.reset(); 
-      this.getUsers(); // added lang
+                          .subscribe(res=>{
+                           this.updateRes = (res.updatedAt);
+                          alert('Updated Successfully! \nUTC: ' + this.updateRes);
+                          let ref = document.getElementById('cancel');
+                          ref?.click();
     })
   }
 
@@ -92,12 +82,6 @@ export class HeaderComponent  implements OnInit {
  
   }
 
-  getUsers() {
-    this.api.getUser()
-    .subscribe(res => {
-      this.userData = res;   
-    })
-  }
   removeToken() {
     localStorage.removeItem('token');
   }

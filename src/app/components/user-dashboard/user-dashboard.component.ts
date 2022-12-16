@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { UserModel } from './user.model';
-import { ApiService } from 'src/app/services/api.service';
-import { HttpClient} from '@angular/common/http';
-import { map } from 'rxjs';
+import {  Component, 
+          OnInit } from '@angular/core';
+import {  faEdit } from '@fortawesome/free-solid-svg-icons';
+import {  faTrash } from '@fortawesome/free-solid-svg-icons';
+import {  FormBuilder, 
+          FormGroup, 
+          Validators} from '@angular/forms';
+import {  UserModel } from './user.model';
+import {  ApiService } from 'src/app/services/api.service';
+import {  HttpClient} from '@angular/common/http';
+import {  map } from 'rxjs';
 
 
 @Component({
@@ -19,7 +22,6 @@ export class UserDashboardComponent implements OnInit{
   newNumberofPages !: boolean;
   previous !: boolean;
   next !: boolean;
-  p: number = 1;
   faEdit = faEdit;
   faTrash = faTrash;
   formValue !: FormGroup;
@@ -27,7 +29,6 @@ export class UserDashboardComponent implements OnInit{
   showUpdate !: boolean;
   userModelObj : UserModel = new UserModel();
   userData !: any;
-  // userData : any[] = [];
   private apiUrl:string = 'https://reqres.in/api/users?'; 
   //for pagination no library//
   per_page: string ='';
@@ -38,14 +39,16 @@ export class UserDashboardComponent implements OnInit{
   imgUrl: string;
   
 
-    constructor(private formBuilder: FormBuilder, private api: ApiService, private http: HttpClient) {}
+    constructor(  private formBuilder: FormBuilder, 
+                  private api: ApiService, 
+                  private http: HttpClient) {}
+
   ngOnInit(): void {
     
     this.formValue = this.formBuilder.group({
       first_name : ['', Validators.required],
       last_name: ['', Validators.required],
       email: ['', Validators.required],
-      //testing for avatar url
       avatar: ['']
     })
 
@@ -53,8 +56,6 @@ export class UserDashboardComponent implements OnInit{
     this.changeDisplay();
     this.pageNumbers.push(1);
     this.newNumberofPages = false;
-    
-    
   }
 
   onClickAdd() {
@@ -63,26 +64,24 @@ export class UserDashboardComponent implements OnInit{
     this.showUpdate = false;
   }
 
-  
   postUserDetails() :void { 
     this.userModelObj.first_name = this.formValue.value.first_name;
     this.userModelObj.last_name = this.formValue.value.last_name;
     this.userModelObj.email = this.formValue.value.email;
-    //test for avatar url
     this.userModelObj.avatar = this.formValue.value.avatar;
 
     
     this.api.postUser(this.userModelObj)
-    .subscribe(res => {
-      console.log(res);
-      alert('User Added Successfully!');
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.formValue.reset(); 
-      this.getUsers(); // added lang
-    }, err => {
-      alert('Something went wrong!');
-    })
+                      .subscribe(res => {
+                        console.log(res);
+                        alert('User Added Successfully!');
+                        let ref = document.getElementById('cancel');
+                        ref?.click();
+                        this.formValue.reset(); 
+                        this.getUsers(); // added lang
+                      }, err => {
+                        alert('Something went wrong!');
+                      })
   }
 
   getUsers() {
@@ -91,7 +90,6 @@ export class UserDashboardComponent implements OnInit{
       this.userData = res;   
     })
   }
-
 
   deleteUser() {
     if(confirm("Are you sure you want to delete?")){
@@ -102,7 +100,6 @@ export class UserDashboardComponent implements OnInit{
         ref?.click();
       })
     }
- 
   }
 
   onEdit(data: any) {
