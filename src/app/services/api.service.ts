@@ -21,7 +21,6 @@ export class ApiService {
     })) 
    }
 
-
    getUser(){
     return this.http.get<any>('https://reqres.in/api/users?page=1&per_page=12'
     )
@@ -36,8 +35,6 @@ export class ApiService {
       return res;
     }))
    }
-
- 
 
   //  deleteUser (id: number) {
   //   return this.http.delete<any>('http://localhost:5000/users/'+id)
@@ -67,14 +64,13 @@ export class ApiService {
     })) 
    }
 
-
    apiUpdateUser(data: any) {
     return this.http.put<any>('https://reqres.in/api/users/2', data)
     .pipe(map((res:any) => {
       return res?.data;
     }))
    }
-  
+
    apiSignUp(datas: any) {
     return this.http.post<any>('https://reqres.in/api/register', datas)
     .pipe(map((res:any)=>{

@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import { Router } from '@angular/router';
-import { ApiService } from 'src/app/services/api.service';
-import { ApiSignUpModel } from './api-sign-up.model';
-import { AuthService } from 'src/app/services/auth.service';
+import {  Component, 
+          OnInit } from '@angular/core';
+import {  FormBuilder, 
+          FormGroup, 
+          Validators } from '@angular/forms';
+import {  HttpClient} from '@angular/common/http';
+import {  Router } from '@angular/router';
+import {  ApiService } from 'src/app/services/api.service';
+import {  AuthService } from 'src/app/services/auth.service';
+import {  ApiSignUpModel } from './api-sign-up.model';
 
 @Component({
   selector: 'app-api-sign-up',
@@ -15,13 +18,13 @@ export class ApiSignUpComponent implements OnInit {
 
   public loginForm !: FormGroup;
   userModelObj : ApiSignUpModel = new ApiSignUpModel();
-  userData !: any;
+  //userData !: any;
 
-
-
-  constructor(private formBuilder : FormBuilder, private http: HttpClient, private router: Router, private api: ApiService, private auth: AuthService) {
-
-  }
+  constructor(private formBuilder : FormBuilder, 
+              private http: HttpClient, 
+              private router: Router, 
+              private api: ApiService, 
+              private auth: AuthService) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -37,20 +40,18 @@ export class ApiSignUpComponent implements OnInit {
   signUp() :void { 
     this.userModelObj.email = this.loginForm.value.email;
     this.userModelObj.password = this.loginForm.value.password;
-    
     this.api.apiSignUp(this.userModelObj)
-    .subscribe(res => {
-      console.log(res);
-      alert('Registred Successfully!');
-      let ref = document.getElementById('cancel');
-      ref?.click();
-      this.loginForm.reset(); 
-      this.router.navigate(['/login']);
-      
-    }, err => {
-      alert( JSON.stringify(err?.error?.error));
-      console.log(err?.error?.error)
-    })
-  }
+                      .subscribe(res => {
+                      //console.log(res);
+                      alert('Registred Successfully!');
+                      let ref = document.getElementById('cancel');
+                      ref?.click();
+                      this.loginForm.reset(); 
+                      this.router.navigate(['/login']);
+                      }, err => {
+                      alert( JSON.stringify(err?.error?.error));
+                      console.log(err?.error?.error)
+                      })
+                  }
 }
 
